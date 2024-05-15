@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package booking;
+
+service BookingService {
+  rpc CreateBooking (CreateBookingRequest) returns (BookingResponse);
+  rpc GetBooking (GetBookingRequest) returns (BookingResponse);
+  rpc UpdateBooking (UpdateBookingRequest) returns (BookingResponse);
+  rpc DeleteBooking (DeleteBookingRequest) returns (BookingResponse);
+}
+
+message CreateBookingRequest {
+  string userId = 1;
+  string flightId = 2;
+  string hotelId = 3;
+}
+
+message GetBookingRequest {
+  string id = 1;
+}
+
+message UpdateBookingRequest {
+  string id = 1;
+  string userId = 2;
+  string flightId = 3;
+  string hotelId = 4;
+}
+
+message DeleteBookingRequest {
+  string id = 1;
+}
+
+message BookingResponse {
+  string id = 1;
+  string userId = 2;
+  string flightId = 3;
+  string hotelId = 4;
+}

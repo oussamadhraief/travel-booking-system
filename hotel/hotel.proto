@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package hotel;
+
+service HotelService {
+  rpc CreateHotel (CreateHotelRequest) returns (HotelResponse);
+  rpc GetHotel (GetHotelRequest) returns (HotelResponse);
+  rpc UpdateHotel (UpdateHotelRequest) returns (HotelResponse);
+  rpc DeleteHotel (DeleteHotelRequest) returns (HotelResponse);
+}
+
+message CreateHotelRequest {
+  string name = 1;
+  string location = 2;
+  int32 availableRooms = 3;
+}
+
+message GetHotelRequest {
+  string id = 1;
+}
+
+message UpdateHotelRequest {
+  string id = 1;
+  string name = 2;
+  string location = 3;
+  int32 availableRooms = 4;
+}
+
+message DeleteHotelRequest {
+  string id = 1;
+}
+
+message HotelResponse {
+  string id = 1;
+  string name = 2;
+  string location = 3;
+  int32 availableRooms = 4;
+}

@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package flight;
+
+service FlightService {
+  rpc CreateFlight (CreateFlightRequest) returns (FlightResponse);
+  rpc GetFlight (GetFlightRequest) returns (FlightResponse);
+  rpc UpdateFlight (UpdateFlightRequest) returns (FlightResponse);
+  rpc DeleteFlight (DeleteFlightRequest) returns (FlightResponse);
+}
+
+message CreateFlightRequest {
+  string flightNumber = 1;
+  string departure = 2;
+  string arrival = 3;
+  string date = 4;
+}
+
+message GetFlightRequest {
+  string id = 1;
+}
+
+message UpdateFlightRequest {
+  string id = 1;
+  string flightNumber = 2;
+  string departure = 3;
+  string arrival = 4;
+  string date = 5;
+}
+
+message DeleteFlightRequest {
+  string id = 1;
+}
+
+message FlightResponse {
+  string id = 1;
+  string flightNumber = 2;
+  string departure = 3;
+  string arrival = 4;
+  string date = 5;
+}
