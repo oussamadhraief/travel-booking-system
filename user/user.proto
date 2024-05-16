@@ -2,34 +2,40 @@ syntax = "proto3";
 
 package user;
 
+// Define the UserService with RPC methods for CRUD operations
 service UserService {
-  rpc CreateUser (CreateUserRequest) returns (UserResponse);
-  rpc GetUser (GetUserRequest) returns (UserResponse);
-  rpc UpdateUser (UpdateUserRequest) returns (UserResponse);
-  rpc DeleteUser (DeleteUserRequest) returns (UserResponse);
+  rpc CreateUser (CreateUserRequest) returns (UserResponse); // Create a new user
+  rpc GetUser (GetUserRequest) returns (UserResponse); // Get details of a user by ID
+  rpc UpdateUser (UpdateUserRequest) returns (UserResponse); // Update user details by ID
+  rpc DeleteUser (DeleteUserRequest) returns (UserResponse); // Delete a user by ID
 }
 
+// Request message for creating a user
 message CreateUserRequest {
-  string name = 1;
-  string email = 2;
+  string name = 1; 
+  string email = 2; 
 }
 
+// Request message for getting a user by ID
 message GetUserRequest {
-  string id = 1;
+  string id = 1; 
 }
 
+// Request message for updating a user
 message UpdateUserRequest {
-  string id = 1;
+  string id = 1; 
   string name = 2;
-  string email = 3;
+  string email = 3; 
 }
 
+// Request message for deleting a user
 message DeleteUserRequest {
-  string id = 1;
+  string id = 1; 
 }
 
+// Response message containing user details
 message UserResponse {
-  string id = 1;
+  string id = 1; 
   string name = 2;
   string email = 3;
 }

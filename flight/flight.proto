@@ -2,13 +2,15 @@ syntax = "proto3";
 
 package flight;
 
+// Define the FlightService with RPC methods for CRUD operations
 service FlightService {
-  rpc CreateFlight (CreateFlightRequest) returns (FlightResponse);
-  rpc GetFlight (GetFlightRequest) returns (FlightResponse);
-  rpc UpdateFlight (UpdateFlightRequest) returns (FlightResponse);
-  rpc DeleteFlight (DeleteFlightRequest) returns (FlightResponse);
+  rpc CreateFlight (CreateFlightRequest) returns (FlightResponse); // Create a new flight
+  rpc GetFlight (GetFlightRequest) returns (FlightResponse); // Get details of a flight by ID
+  rpc UpdateFlight (UpdateFlightRequest) returns (FlightResponse); // Update flight details by ID
+  rpc DeleteFlight (DeleteFlightRequest) returns (FlightResponse); // Delete a flight by ID
 }
 
+// Request message for creating a flight
 message CreateFlightRequest {
   string flightNumber = 1;
   string departure = 2;
@@ -16,10 +18,12 @@ message CreateFlightRequest {
   string date = 4;
 }
 
+// Request message for getting a flight by ID
 message GetFlightRequest {
   string id = 1;
 }
 
+// Request message for updating a flight
 message UpdateFlightRequest {
   string id = 1;
   string flightNumber = 2;
@@ -28,10 +32,12 @@ message UpdateFlightRequest {
   string date = 5;
 }
 
+// Request message for deleting a flight
 message DeleteFlightRequest {
   string id = 1;
 }
 
+// Response message containing flight details
 message FlightResponse {
   string id = 1;
   string flightNumber = 2;

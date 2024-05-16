@@ -13,6 +13,7 @@
     "axios": "^1.6.8",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "graphql": "^15.5.0",
     "kafkajs": "^1.16.0",

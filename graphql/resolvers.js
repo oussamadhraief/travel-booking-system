@@ -5,6 +5,7 @@ const Hotel = require('../hotel/hotel');
 const Booking = require('../booking/booking');
 const sendMessage = require('../kafka/kafkaProducer');
 
+// Resolver functions for handling queries and mutations
 const resolvers = {
   Query: {
     users: async () => {
@@ -202,6 +203,7 @@ const resolvers = {
       }
     },
   },
+  // Resolver functions for the Booking type to resolve nested fields
   Booking: {
     user: async (booking) => {
       return await User.findById(booking.userId);

@@ -2,23 +2,27 @@ syntax = "proto3";
 
 package hotel;
 
+// Define the HotelService with RPC methods for CRUD operations
 service HotelService {
-  rpc CreateHotel (CreateHotelRequest) returns (HotelResponse);
-  rpc GetHotel (GetHotelRequest) returns (HotelResponse);
-  rpc UpdateHotel (UpdateHotelRequest) returns (HotelResponse);
-  rpc DeleteHotel (DeleteHotelRequest) returns (HotelResponse);
+  rpc CreateHotel (CreateHotelRequest) returns (HotelResponse); // Create a new hotel
+  rpc GetHotel (GetHotelRequest) returns (HotelResponse); // Get details of a hotel by ID
+  rpc UpdateHotel (UpdateHotelRequest) returns (HotelResponse); // Update hotel details by ID
+  rpc DeleteHotel (DeleteHotelRequest) returns (HotelResponse); // Delete a hotel by ID
 }
 
+// Request message for creating a hotel
 message CreateHotelRequest {
   string name = 1;
   string location = 2;
   int32 availableRooms = 3;
 }
 
+// Request message for getting a hotel by ID
 message GetHotelRequest {
   string id = 1;
 }
 
+// Request message for updating a hotel
 message UpdateHotelRequest {
   string id = 1;
   string name = 2;
@@ -26,10 +30,12 @@ message UpdateHotelRequest {
   int32 availableRooms = 4;
 }
 
+// Request message for deleting a hotel
 message DeleteHotelRequest {
   string id = 1;
 }
 
+// Response message containing hotel details
 message HotelResponse {
   string id = 1;
   string name = 2;

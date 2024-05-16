@@ -10,10 +10,10 @@ const protoLoader = require('@grpc/proto-loader');
 const sendMessage = require('./kafka/kafkaProducer');
 
 const app = express();
-connectDB();
+connectDB(); // Connect to the database
 
-app.use(cors());
-app.use(bodyParser.json());
+app.use(cors()); 
+app.use(bodyParser.json()); 
 
 // Load Protos
 const userProtoPath = __dirname + '/user/user.proto';
@@ -21,6 +21,7 @@ const flightProtoPath = __dirname + '/flight/flight.proto';
 const hotelProtoPath = __dirname + '/hotel/hotel.proto';
 const bookingProtoPath = __dirname + '/booking/booking.proto';
 
+// Load gRPC package definitions
 const userPackageDefinition = protoLoader.loadSync(userProtoPath, {
   keepCase: true,
   longs: String,
@@ -50,11 +51,13 @@ const bookingPackageDefinition = protoLoader.loadSync(bookingProtoPath, {
   oneofs: true,
 });
 
+// Load gRPC objects
 const userProto = grpc.loadPackageDefinition(userPackageDefinition).user;
 const flightProto = grpc.loadPackageDefinition(flightPackageDefinition).flight;
 const hotelProto = grpc.loadPackageDefinition(hotelPackageDefinition).hotel;
 const bookingProto = grpc.loadPackageDefinition(bookingPackageDefinition).booking;
 
+// Create gRPC clients
 const userClient = new userProto.UserService('localhost:50051', grpc.credentials.createInsecure());
 const flightClient = new flightProto.FlightService('localhost:50052', grpc.credentials.createInsecure());
 const hotelClient = new hotelProto.HotelService('localhost:50053', grpc.credentials.createInsecure());
@@ -72,6 +75,7 @@ app.post('/user', (req, res) => {
   });
 });
 
+// Get sinle user using id
 app.get('/user/:id', (req, res) => {
   userClient.GetUser({ id: req.params.id }, (error, response) => {
     if (error) {
@@ -82,6 +86,7 @@ app.get('/user/:id', (req, res) => {
   });
 });
 
+// Update user
 app.put('/user/:id', (req, res) => {
   const updatedUser = { ...req.body, id: req.params.id };
   userClient.UpdateUser(updatedUser, async (error, response) => {
@@ -94,6 +99,7 @@ app.put('/user/:id', (req, res) => {
   });
 });
 
+// Delete user
 app.delete('/user/:id', (req, res) => {
   userClient.DeleteUser({ id: req.params.id }, async (error, response) => {
     if (error) {
@@ -105,14 +111,12 @@ app.delete('/user/:id', (req, res) => {
   });
 });
 
-// Similarly, add REST Endpoints for Flight, Hotel, and Booking
-
 // GraphQL Endpoint
 const server = new ApolloServer({ typeDefs, resolvers });
 
 const startServer = async () => {
-  await server.start();
-  server.applyMiddleware({ app, path: '/graphql' });
+  await server.start(); // Start Apollo Server
+  server.applyMiddleware({ app, path: '/graphql' }); // Apply middleware for GraphQL
 
   const port = 4000;
   app.listen(port, () => {
@@ -121,4 +125,4 @@ const startServer = async () => {
   });
 };
 
-startServer();
+startServer(); // Start the server
